@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Head from 'next/head';
-import fetch from 'isomorphic-unfetch';
 import datasets from '../data/datasets';
 import HeroContent from '../components/explore-the-data-page/HeroContent';
 import FilterPanel from '../components/explore-the-data-page/FilterPanel';
 import BarChart from '../components/charts/chartsjs/BarChart';
 import DoughnutChart from '../components/charts/chartsjs/DoughnutChart';
+import { fetchDataset } from './utils';
 
 export default class Explore extends React.Component {
   constructor(props) {
@@ -108,8 +108,7 @@ export default class Explore extends React.Component {
     // If we don't need to fetch the json again, just update the active dataset
     let newData;
     if (!data[selectedDataset]) {
-      const res = await fetch(datasets[selectedDataset].urls.compressed);
-      newData = await res.json();
+      newData = await fetchDataset(selectedDataset);
     } else {
       newData = data[selectedDataset];
     }
@@ -297,8 +296,7 @@ Explore.getInitialProps = async function() {
   // Setup an array to get the property name of each dataset
   const datasetNames = Object.keys(datasets);
   // Fetch the json for the first dataset
-  const res = await fetch(datasets[datasetNames[0]].urls.compressed);
-  const data = await res.json();
+  const data = await fetchDataset();
   return { datasetNames, data };
 };
 

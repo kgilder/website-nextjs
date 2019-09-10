@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import styled from 'styled-components';
-import fetch from 'isomorphic-unfetch';
 import Primary from '../components/Primary';
 import NewsFeed from '../components/homepage/NewsFeed';
 import StateofData from '../components/homepage/StateofData';
 import datasets from '../data/datasets';
 import BarChart from '../components/charts/chartsjs/BarChart';
+import { fetchDataset } from './utils';
 
 const pageTitle = 'Home Page';
 
@@ -56,8 +56,7 @@ class Index extends React.Component {
     // If we don't need to fetch the json again, just update the active dataset
     let newData;
     if (!data[selectedDataset]) {
-      const res = await fetch(datasets[selectedDataset].urls.compressed);
-      newData = await res.json();
+      newData = await fetchDataset(selectedDataset);
     } else {
       newData = data[selectedDataset];
     }
@@ -239,8 +238,7 @@ Index.getInitialProps = async function() {
   // Setup an array to get the property name of each dataset
   const datasetNames = Object.keys(datasets);
   // Fetch the json for the first dataset
-  const res = await fetch(datasets[datasetNames[0]].urls.compressed);
-  const data = await res.json();
+  const data = await fetchDataset();
   return { datasetNames, data };
 };
 
