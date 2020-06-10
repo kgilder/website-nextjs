@@ -65,7 +65,7 @@ who:
           minority communities. When not working, he enjoys spending time with
           his family and his rescue Doberman Pinscher, Lilly, and gardening.
         headshot: https://res.cloudinary.com/texas-justice-initiative/image/upload/v1591806510/ChrisBooker_cmcmqp.jpg
-      - name: Nicole Hutchison-Moore
+      - name: Nicole Hutchison
         headshot: https://res.cloudinary.com/texas-justice-initiative/image/upload/v1591811354/NicoleHutchison-Moore_hmikod.jpg
         biography: >-
           
